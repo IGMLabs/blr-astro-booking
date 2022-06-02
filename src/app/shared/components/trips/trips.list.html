@@ -1,0 +1,14 @@
+
+
+<article>
+  <h3> Working with {{trips.length}} trips </h3>
+  <ul>
+    <li *ngFor="let trip of trips">
+       <span [ngClass]="trip.status | lowercase"> {{ trip.destination}}   </span>
+      <ng-container *ngIf="trip.kind==='WithStay' then withStay; else tripOnly "></ng-container>
+      <ng-template #withStay> ✈ </ng-template>
+      <ng-template #tripOnly> 🧳 </ng-template>
+    </li>
+  </ul>
+  <button (click)="reload('trips')"> ♻ </button>
+</article>

@@ -1,0 +1,14 @@
+
+
+<article>
+  <h3> Working with {{getAgenciesLength()}} agencies </h3>
+  <ul>
+    <li *ngFor="let agencia of agencies">
+       <a [routerLink]="['/','agencies','agency',agencia.id]" routerLinkActive="router-link-active"  [ngClass]="agencia.status | lowercase"> {{ agencia.name }}   </a>
+      <ng-container *ngIf="agencia.range==='Interplanetary' then interplanetario; else orbital "></ng-container>
+      <ng-template #interplanetario> ⭐ </ng-template>
+      <ng-template #orbital> 🌍 </ng-template>
+    </li>
+  </ul>
+  <button (click)="reload('agencies')"> ♻ </button>
+</article>
