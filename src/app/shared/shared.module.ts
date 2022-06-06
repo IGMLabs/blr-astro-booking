@@ -4,6 +4,7 @@ import { ReloadingComponent } from './components/reloading/reloading.component';
 import { AgenciesList } from './components/agencies/agencies.list';
 import { TripsList } from './components/trips/trips.list';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,13 +16,15 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
     ReloadingComponent,
     RouterModule,
     AgenciesList,
-    TripsList
+    TripsList,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

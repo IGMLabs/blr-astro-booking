@@ -7,6 +7,7 @@ const routes: Routes = [
     path: '',
     component: TripsComponent
   },
+  { path: 'trip/:id', loadChildren: () => import('./trip/trip.module').then(m => m.TripModule) },
 ];
 
 @NgModule({
