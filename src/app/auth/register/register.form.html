@@ -36,6 +36,7 @@
            formControlName="confirmPassword"
            [attr.aria-invalid]="hasError('confirmPassword')">
       <small *ngIf="mustShowMessage('confirmPassword')"> {{getErrorMessage('confirmPassword')}} </small>
+      <small > {{getPasswordMatchMessage()}} </small>
   </div>
   <div>
     <input type="checkbox"
@@ -46,5 +47,8 @@
     <label for="acceptTerms">I read Terms & Conditions</label>
       <small *ngIf="mustShowMessage('acceptTerms')"> {{getErrorMessage('acceptTerms')}} </small>
   </div>
+  <pre>
+    {{form.errors | json}}
+  </pre>
   <button [disabled]="form.invalid" (click)="onSave()">Save</button>
 </form>

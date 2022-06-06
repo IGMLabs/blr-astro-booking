@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormBuilder, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-register-form',
@@ -17,15 +17,40 @@ export class RegisterForm implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(15)], ),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(15)], ),
       acceptTerms: new FormControl(false, [Validators.requiredTrue], ),
+    },{
+      validators: [this.passwordMatch],
     });
    }
+
+
+   private passwordMatch(form: AbstractControl): ValidationErrors | null{
+
+    const password = form.get('password');
+    const confirmPassword = form.get('confirmPassword');
+    if(!password || !confirmPassword) {
+      return {
+        passwordMatch: 'No passwords recived',
+      };
+    }
+    if(password.value !== confirmPassword.value) {
+      return {
+        passwordMatch: 'Passwords dont match',
+      };
+    }
+
+    return null;
+   }
+
+
+
 
   ngOnInit(): void {
   }
 
   onSave(){
-    const contact = this.form.value;
-    console.log(contact);
+    const {name, email, password} = this.form.value;
+    const register = {name, email, password};
+    console.log('Send register', register);
   }
 
   getControl(controlName : string):AbstractControl | null{
@@ -46,6 +71,12 @@ export class RegisterForm implements OnInit {
     return errorMessage;
   }
 
+  getPasswordMatchMessage(){
+    const errors = this.form.errors;
+    if(!errors){return ''};
+    if(errors['passwordMatch']){return errors ['passwordMatch']};
+    return '';
+  }
   hasError(controlName: string): boolean{
     const control = this.getControl(controlName);
     if(!control){return false;}
