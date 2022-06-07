@@ -7,6 +7,7 @@ const routes: Routes = [
     path: '',
    component: AgenciesComponent
   },
+  { path: 'agency/new', loadChildren: () => import('./new-agency/new-agency.module').then(m => m.NewAgencyModule) },
   {
     path: 'agency/:id',
     loadChildren: () => import('./agency/agency.module').then(m => m.AgencyModule)

@@ -1,0 +1,58 @@
+
+<form [formGroup]="form">
+  <div>
+    <label for="destination"> Destination Name</label>
+    <input name="destination"
+           type="text"
+           formControlName="destination"
+           [attr.aria-invalid]="hasError('destination')">
+    <small *ngIf="mustShowMessage('destination')">{{ getErrorMessage('destination') }}</small>
+  </div>
+  <div>
+    <label for="agencyId"> Agency Id</label>
+    <select name="agencyId"
+            formControlName="agencyId">
+      <option value="" selected>Select a Agency Id</option>
+      <option *ngFor="let agency of agencies"
+              [value]="agency.id">{{ agency.name }}</option>
+    </select>
+    <small *ngIf="mustShowMessage('agencyId')">{{ getErrorMessage('agencyId') }}</small>
+  </div>
+  <div>
+    <label for="plazas"> Places</label>
+    <input name="plazas"
+           type="number"
+           formControlName="plazas"
+           [attr.aria-invalid]="hasError('plazas')">
+    <small *ngIf="mustShowMessage('plazas')">{{ getErrorMessage('plazas') }}</small>
+  </div>
+  <div>
+    <label for="precio"> Price</label>
+    <input name="precio"
+           type="number"
+           formControlName="precio"
+           [attr.aria-invalid]="hasError('precio')">
+    <small *ngIf="mustShowMessage('precio')">{{ getErrorMessage('precio') }}</small>
+  </div>
+  <div>
+    <label for="dateFrom"> Date from</label>
+    <input name="dateFrom"
+           type="date"
+           formControlName="dateFrom"
+           [attr.aria-invalid]="hasError('dateFrom')">
+    <small *ngIf="mustShowMessage('dateFrom')">{{ getErrorMessage('dateFrom') }}</small>
+  </div>
+  <div>
+    <label for="dateTo"> Date to</label>
+    <input name="dateTo"
+           type="date"
+           formControlName="dateTo"
+           [attr.aria-invalid]="hasError('dateTo')">
+    <small *ngIf="mustShowMessage('dateTo')">{{ getErrorMessage('dateTo') }}</small>
+    <small > {{getDateMessage()}} </small>
+  </div>
+
+
+  <button [disabled]="form.invalid"
+          (click)="onSave()">Save</button>
+</form>
