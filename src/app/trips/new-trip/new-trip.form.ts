@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormValidationsService } from '../../core/forms/form-validations.service';
 import {
   FormBuilder,
   FormControl,
@@ -29,7 +30,7 @@ export class NewTripForm implements OnInit {
   ];
   public statuses = ['Confirmed', 'Waiting'];
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: FormBuilder, fvs: FormValidationsService) {
     this.form = formBuilder.group(
       {
         destination: new FormControl('', [
@@ -52,7 +53,7 @@ export class NewTripForm implements OnInit {
         dateTo: new FormControl('', [Validators.required]),
       },
       {
-        validators: [this.dateControl],
+        validators: [fvs.dateControl],
       }
     );
   }
@@ -87,22 +88,7 @@ export class NewTripForm implements OnInit {
     return errorMessage;
   }
 
-  dateControl(form: AbstractControl): ValidationErrors | null {
-    const dateForm = form.get('dateFrom');
-    const dateTo = form.get('dateTo');
 
-    if (!dateForm || !dateTo) {
-      return {
-        dateControl: 'Dates dont exist',
-      };
-    }
-    if (dateForm.value > dateTo.value) {
-      return {
-        dateControl: 'Dates wrong',
-      };
-    }
-    return null;
-  }
 
   private getControl(controlName: string): AbstractControl | null {
     return this.form.get(controlName);
