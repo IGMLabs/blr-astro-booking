@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormMessagesService } from '../../core/forms/form-messages.service';
+import { FormValidationsService } from '../../core/forms/form-validations.service';
 
 @Component({
   selector: 'app-login-form',
@@ -11,7 +13,7 @@ export class LoginForm implements OnInit {
   form: FormGroup ;
 
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: FormBuilder, public fms: FormMessagesService) {
     this.form = formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email], ),
       password: new FormControl('', [Validators.required], ),
@@ -27,30 +29,16 @@ export class LoginForm implements OnInit {
     console.log('Send Login', register);
   }
 
-  getControl(controlName : string):AbstractControl | null{
-    return this.form.get(controlName);
-  }
-
   getErrorMessage(controlName:string):string{
-    const control = this.getControl(controlName);
-    if(!control){return '';}
-    if(!control.errors){return '';}
-    const errors = control.errors;
-    let errorMessage ='';
-    errorMessage += errors['required']? ' 💢 Field is required' : '';
-    return errorMessage;
+    return this.fms.getErrorMessage(this.form, controlName);
   }
 
   hasError(controlName: string): boolean{
-    const control = this.getControl(controlName);
-    if(!control){return false;}
-    return control.invalid;
+    return this.fms.hasError(this.form, controlName);
   }
 
   mustShowMessage (controlName:string): boolean{
-    const control = this.getControl(controlName);
-    if(!control){return false;}
-    return control.touched && control.invalid;
+    return this.fms.mustShowMessage(this.form, controlName);
   }
 
 

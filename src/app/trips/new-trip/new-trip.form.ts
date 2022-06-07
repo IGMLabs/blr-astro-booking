@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormValidationsService } from '../../core/forms/form-validations.service';
+import { FormMessagesService } from '../../core/forms/form-messages.service';
+import { FormUtilityService } from '../../core/forms/form-utility.service';
 import {
   FormBuilder,
   FormControl,
@@ -30,7 +32,9 @@ export class NewTripForm implements OnInit {
   ];
   public statuses = ['Confirmed', 'Waiting'];
 
-  constructor(formBuilder: FormBuilder, fvs: FormValidationsService) {
+
+  constructor(formBuilder: FormBuilder, fvs: FormValidationsService
+    ,public fms : FormMessagesService, public fus: FormUtilityService) {
     this.form = formBuilder.group(
       {
         destination: new FormControl('', [
@@ -57,49 +61,22 @@ export class NewTripForm implements OnInit {
       }
     );
   }
-  public hasError(controlName: string): boolean {
-    const control = this.getControl(controlName);
-    if (!control) return false;
-    return control.invalid;
-  }
+
 
   public mustShowMessage(controlName: string): boolean {
-    const control = this.getControl(controlName);
-    if (!control) return false;
-    return control.touched && control.invalid;
+    return this.fms.mustShowMessage(this.form, controlName);
   }
 
   public getErrorMessage(controlName: string): string {
-    const control = this.getControl(controlName);
-    if (!control) return '';
-    if (!control.errors) return '';
-    const errors = control.errors;
-    let errorMessage = '';
-    errorMessage += errors['required'] ? '🔥 Field is required ' : ' ';
-    errorMessage += errors['minlength']
-      ? `🔥 More than ${errors['minlength'].requiredLength} chars`
-      : ' ';
-    errorMessage += errors['min']
-      ? `🔥 Field needs more ${errors['min'].min} `
-      : ' ';
-    errorMessage += errors['max']
-      ? `🔥 Field needs less ${errors['max'].max}`
-      : ' ';
-    return errorMessage;
+    return this.fms.getErrorMessage(this.form, controlName);
   }
 
-
-
-  private getControl(controlName: string): AbstractControl | null {
-    return this.form.get(controlName);
+  public hasError( controlName: string): boolean {
+    return this.fms.hasError(this.form, controlName);
   }
 
-  private getDashId(destino: string, id: string): string {
-    const str = destino + ' ' + id + ' ' + this.nextnumber();
-    return str.toLocaleLowerCase().replace(/ /g, '-');
-  }
-  private nextnumber() {
-    return this.autoN++;
+  private getDashIdTrip(destino: string, id: string): string {
+    return this.fus.getDashIdTrip(destino,id);
   }
 
   getDateMessage() {
@@ -116,7 +93,7 @@ export class NewTripForm implements OnInit {
   onSave() {
     const { destination, agencyId, plazas, precio, dateFrom, dateTo } =
       this.form.value;
-    const id = this.getDashId(destination, agencyId);
+    const id = this.getDashIdTrip(destination, agencyId);
     const newTripData = {
       id,
       destination,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormBuilder, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 import { FormValidationsService } from '../../core/forms/form-validations.service';
+import { FormMessagesService } from '../../core/forms/form-messages.service';
 
 @Component({
   selector: 'app-register-form',
@@ -11,7 +12,8 @@ export class RegisterForm implements OnInit {
   form: FormGroup ;
 
 
-  constructor(formBuilder: FormBuilder, fvs: FormValidationsService) {
+  constructor(formBuilder: FormBuilder, fvs: FormValidationsService,
+     public fms: FormMessagesService) {
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)], ),
       email: new FormControl('', [Validators.required, Validators.email], ),
@@ -32,40 +34,20 @@ export class RegisterForm implements OnInit {
     console.log('Send register', register);
   }
 
-  getControl(controlName : string):AbstractControl | null{
-    return this.form.get(controlName);
-  }
-
 
   getErrorMessage(controlName:string):string{
-    const control = this.getControl(controlName);
-    if(!control){return '';}
-    if(!control.errors){return '';}
-    const errors = control.errors;
-    let errorMessage ='';
-    errorMessage += errors['required']? ' 💢 Field is required' : '';
-    errorMessage += errors['email']? ' 💢 Field must be an email' : '';
-    errorMessage += errors['minlength']? ` 💢 Field needs more than ${errors['minlength'].requiredLength} chars` : '';
-    errorMessage += errors['maxlength']? ` 💢 Field needs less than ${errors['maxlength'].requiredLength} chars` : '';
-    return errorMessage;
+    return this.fms.getErrorMessage(this.form, controlName);
   }
 
   getPasswordMatchMessage(){
-    const errors = this.form.errors;
-    if(!errors){return ''};
-    if(errors['passwordMatch']){return errors ['passwordMatch']};
-    return '';
+    return this.fms.getPasswordMatchMessage(this.form);
   }
   hasError(controlName: string): boolean{
-    const control = this.getControl(controlName);
-    if(!control){return false;}
-    return control.invalid;
+    return this.fms.hasError(this.form, controlName);
   }
 
   mustShowMessage (controlName:string): boolean{
-    const control = this.getControl(controlName);
-    if(!control){return false;}
-    return control.touched && control.invalid;
+    return this.fms.mustShowMessage(this.form, controlName);
   }
 
 }

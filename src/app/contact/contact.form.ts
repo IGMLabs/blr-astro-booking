@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormMessagesService } from '../core/forms/form-messages.service';
 
 
 interface Contact {
@@ -20,7 +21,8 @@ export class ContactForm implements OnInit {
   form: FormGroup ;
 
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: FormBuilder,
+    public fms: FormMessagesService) {
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)], ),
       email: new FormControl('', [Validators.required, Validators.email], ),
@@ -37,34 +39,16 @@ export class ContactForm implements OnInit {
     console.log(contact);
   }
 
-  getControl(controlName : string):AbstractControl | null{
-    return this.form.get(controlName);
-  }
-
-
   getErrorMessage(controlName:string):string{
-    const control = this.getControl(controlName);
-    if(!control){return '';}
-    if(!control.errors){return '';}
-    const errors = control.errors;
-    let errorMessage ='';
-    errorMessage += errors['required']? ' 💢 Field is required' : '';
-    errorMessage += errors['email']? ' 💢 Field must be an email' : '';
-    errorMessage += errors['minlength']? ` 💢 Field needs more than ${errors['minlength'].requiredLength} chars` : '';
-    errorMessage += errors['maxlength']? ` 💢 Field needs less than ${errors['maxlength'].requiredLength} chars` : '';
-    return errorMessage;
+    return this.fms.getErrorMessage(this.form, controlName);
   }
 
   hasError(controlName: string){
-    const control = this.getControl(controlName);
-    if(!control){return false;}
-    return control.invalid;
+    return this.fms.hasError(this.form, controlName);
   }
 
   mustShowMessage (controlName:string){
-    const control = this.getControl(controlName);
-    if(!control){return false;}
-    return control.touched && control.invalid;
+    return this.fms.mustShowMessage(this.form, controlName);
   }
 
 }
