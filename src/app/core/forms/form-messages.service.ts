@@ -15,7 +15,7 @@ export class FormMessagesService {
     return control.invalid;
   }
 
-  private getControl(form:FormGroup,controlName: string): AbstractControl | null {
+  public getControl(form:FormGroup,controlName: string): AbstractControl | null {
     return form.get(controlName);
   }
 
@@ -45,13 +45,6 @@ export class FormMessagesService {
       errorMessage += errors['email']? ' 💢 Field must be an email' : '';
       errorMessage += errors['maxlength']? ` 💢 Field needs less than ${errors['maxlength'].requiredLength} chars` : '';
     return errorMessage;
-  }
-
-  getPasswordMatchMessage(form:FormGroup){
-    const errors = form.errors;
-    if(!errors){return ''};
-    if(errors['passwordMatch']){return errors ['passwordMatch']};
-    return '';
   }
 
 

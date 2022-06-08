@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormMessagesService } from '../../core/forms/form-messages.service';
 import { FormValidationsService } from '../../core/forms/form-validations.service';
 import { FormUtilityService } from '../../core/forms/form-utility.service';
+import { FormBase } from '../../core/forms/form.base';
 import {
   AbstractControl,
   FormBuilder,
@@ -15,8 +16,7 @@ import {
   templateUrl: './new-agency.form.html',
   styleUrls: ['./new-agency.form.css'],
 })
-export class NewAgencyForm implements OnInit {
-  public form: FormGroup;
+export class NewAgencyForm extends FormBase implements OnInit {
   public ranges = [
     { id: 'Orbital', name: '🌎 Orbiting around the earth' },
     {
@@ -27,25 +27,16 @@ export class NewAgencyForm implements OnInit {
   ];
   public statuses = ['Active', 'Pending'];
 
-  constructor(formBuilder: FormBuilder, public fms : FormMessagesService,
-      public fus: FormUtilityService) {
+  constructor(formBuilder: FormBuilder, fms : FormMessagesService,
+      private fus: FormUtilityService) {
+        super(fms);
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       range: new FormControl('', [Validators.required]),
       status: new FormControl(this.statuses[0]),
     });
   }
-  public hasError(controlName: string): boolean {
-    return this.fms.hasError(this.form, controlName);
-  }
 
-  public mustShowMessage(controlName: string): boolean {
-    return this.fms.mustShowMessage(this.form, controlName);
-  }
-
-  public getErrorMessage(controlName: string): string {
-    return this.fms.getErrorMessage(this.form, controlName);
-  }
 
   public onSubmitClick() {
     const { name, range, status } = this.form.value;

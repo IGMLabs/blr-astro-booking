@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormValidationsService } from '../../core/forms/form-validations.service';
 import { FormMessagesService } from '../../core/forms/form-messages.service';
 import { FormUtilityService } from '../../core/forms/form-utility.service';
+import { FormBase } from '../../core/forms/form.base';
 import {
   FormBuilder,
   FormControl,
@@ -16,9 +17,8 @@ import {
   templateUrl: './new-trip.form.html',
   styleUrls: ['./new-trip.form.css'],
 })
-export class NewTripForm implements OnInit {
+export class NewTripForm extends FormBase implements OnInit {
   autoN = 5;
-  public form: FormGroup;
   public agencies = [
     { id: 'space-y', name: '🌌 To the Space Y' },
     {
@@ -34,7 +34,8 @@ export class NewTripForm implements OnInit {
 
 
   constructor(formBuilder: FormBuilder, fvs: FormValidationsService
-    ,public fms : FormMessagesService, public fus: FormUtilityService) {
+    ,fms : FormMessagesService, private fus: FormUtilityService) {
+      super(fms);
     this.form = formBuilder.group(
       {
         destination: new FormControl('', [
@@ -60,19 +61,6 @@ export class NewTripForm implements OnInit {
         validators: [fvs.dateControl],
       }
     );
-  }
-
-
-  public mustShowMessage(controlName: string): boolean {
-    return this.fms.mustShowMessage(this.form, controlName);
-  }
-
-  public getErrorMessage(controlName: string): string {
-    return this.fms.getErrorMessage(this.form, controlName);
-  }
-
-  public hasError( controlName: string): boolean {
-    return this.fms.hasError(this.form, controlName);
   }
 
   private getDashIdTrip(destino: string, id: string): string {
