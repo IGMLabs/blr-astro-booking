@@ -19,36 +19,36 @@
     <small *ngIf="mustShowMessage('agencyId')">{{ getErrorMessage('agencyId') }}</small>
   </div>
   <div>
-    <label for="plazas"> Places</label>
-    <input name="plazas"
+    <label for="places"> Places</label>
+    <input name="places"
            type="number"
-           formControlName="plazas"
-           [attr.aria-invalid]="hasError('plazas')">
-    <small *ngIf="mustShowMessage('plazas')">{{ getErrorMessage('plazas') }}</small>
+           formControlName="places"
+           [attr.aria-invalid]="hasError('places')">
+    <small *ngIf="mustShowMessage('places')">{{ getErrorMessage('places') }}</small>
   </div>
   <div>
-    <label for="precio"> Price</label>
-    <input name="precio"
+    <label for="flightPrice"> Price</label>
+    <input name="flightPrice"
            type="number"
-           formControlName="precio"
-           [attr.aria-invalid]="hasError('precio')">
-    <small *ngIf="mustShowMessage('precio')">{{ getErrorMessage('precio') }}</small>
+           formControlName="flightPrice"
+           [attr.aria-invalid]="hasError('flightPrice')">
+    <small *ngIf="mustShowMessage('flightPrice')">{{ getErrorMessage('flightPrice') }}</small>
   </div>
   <div>
-    <label for="dateFrom"> Date from</label>
-    <input name="dateFrom"
+    <label for="startDate"> Date from</label>
+    <input name="startDate"
            type="date"
-           formControlName="dateFrom"
-           [attr.aria-invalid]="hasError('dateFrom')">
-    <small *ngIf="mustShowMessage('dateFrom')">{{ getErrorMessage('dateFrom') }}</small>
+           formControlName="startDate"
+           [attr.aria-invalid]="hasError('startDate')">
+    <small *ngIf="mustShowMessage('startDate')">{{ getErrorMessage('startDate') }}</small>
   </div>
   <div>
-    <label for="dateTo"> Date to</label>
-    <input name="dateTo"
+    <label for="endDate"> Date to</label>
+    <input name="endDate"
            type="date"
-           formControlName="dateTo"
-           [attr.aria-invalid]="hasError('dateTo')">
-    <small *ngIf="mustShowMessage('dateTo')">{{ getErrorMessage('dateTo') }}</small>
+           formControlName="endDate"
+           [attr.aria-invalid]="hasError('endDate')">
+    <small *ngIf="mustShowMessage('endDate')">{{ getErrorMessage('endDate') }}</small>
     <small > {{getDateMessage()}} </small>
   </div>
 

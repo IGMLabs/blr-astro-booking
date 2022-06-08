@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormValidationsService } from '../../core/forms/form-validations.service';
 import { FormMessagesService } from '../../core/forms/form-messages.service';
 import { FormUtilityService } from '../../core/forms/form-utility.service';
@@ -7,10 +7,11 @@ import {
   FormBuilder,
   FormControl,
   Validators,
-  AbstractControl,
-  FormGroup,
-  ValidationErrors,
 } from '@angular/forms';
+import { AgenciesApi } from 'src/app/core/api/agencies.api';
+import { Agency } from '../../core/api/agency.inteface';
+import { TripsApi } from '../../core/api/trips.api';
+import { Trips } from '../../core/api/trips.inteface';
 
 @Component({
   selector: 'app-new-trip-form',
@@ -19,23 +20,15 @@ import {
 })
 export class NewTripForm extends FormBase implements OnInit {
   autoN = 5;
-  public agencies = [
-    { id: 'space-y', name: '🌌 To the Space Y' },
-    {
-      id: 'green-origin',
-      name: '🥗 To Green Origin',
-    },
-    {
-      id: 'vingin-way',
-      name: '🛒 To Virgin Way',
-    },
-  ];
-  public statuses = ['Confirmed', 'Waiting'];
-
+  @Input() public agencies: Agency[]=[];
+  @Input() public statuses: string[] = [];
+  @Output() public save = new EventEmitter<Trips>();
 
   constructor(formBuilder: FormBuilder, fvs: FormValidationsService
-    ,fms : FormMessagesService, private fus: FormUtilityService) {
+    ,fms : FormMessagesService, private fus: FormUtilityService,
+    private agenciesApi: AgenciesApi, private tripsApi:TripsApi) {
       super(fms);
+      this.agencies = agenciesApi.getAll();
     this.form = formBuilder.group(
       {
         destination: new FormControl('', [
@@ -44,18 +37,18 @@ export class NewTripForm extends FormBase implements OnInit {
           Validators.maxLength(20),
         ]),
         agencyId: new FormControl('', [Validators.required]),
-        plazas: new FormControl('', [
+        places: new FormControl('', [
           Validators.required,
           Validators.min(1),
           Validators.max(10),
         ]),
-        precio: new FormControl('', [
+        flightPrice: new FormControl('', [
           Validators.required,
           Validators.min(1000000),
           Validators.max(10000000),
         ]),
-        dateFrom: new FormControl('', [Validators.required]),
-        dateTo: new FormControl('', [Validators.required]),
+        startDate: new FormControl('', [Validators.required]),
+        endDate: new FormControl('', [Validators.required]),
       },
       {
         validators: [fvs.dateControl],
@@ -79,19 +72,21 @@ export class NewTripForm extends FormBase implements OnInit {
   }
 
   onSave() {
-    const { destination, agencyId, plazas, precio, dateFrom, dateTo } =
+    const { destination, agencyId, places, flightPrice, startDate, endDate } =
       this.form.value;
     const id = this.getDashIdTrip(destination, agencyId);
     const newTripData = {
       id,
       destination,
       agencyId,
-      plazas,
-      precio,
-      dateFrom,
-      dateTo,
+      places,
+      flightPrice,
+      startDate,
+      endDate,
     };
     console.warn('Send trip data ', newTripData);
+    this.tripsApi.post(newTripData);
+    this.save.emit(newTripData);
   }
   ngOnInit(): void {}
 }

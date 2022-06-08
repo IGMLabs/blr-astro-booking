@@ -28,8 +28,8 @@ export class FormValidationsService {
    }
 
    dateControl(form: AbstractControl): ValidationErrors | null {
-    const dateForm = form.get('dateFrom');
-    const dateTo = form.get('dateTo');
+    const dateForm = form.get('startDate');
+    const dateTo = form.get('endDate');
 
     if (!dateForm || !dateTo) {
       return {

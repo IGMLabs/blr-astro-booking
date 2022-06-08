@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { AgencyRoutingModule } from './agency-routing.module';
 import { AgencyPage } from './agency.page';
+import { AgencyView } from './agency.view';
 
 
 @NgModule({
   declarations: [
-    AgencyPage
+    AgencyPage,
+    AgencyView
   ],
   imports: [
     CommonModule,

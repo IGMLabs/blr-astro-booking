@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormMessagesService } from '../../core/forms/form-messages.service';
-import { FormValidationsService } from '../../core/forms/form-validations.service';
 import { FormUtilityService } from '../../core/forms/form-utility.service';
 import { FormBase } from '../../core/forms/form.base';
+import { IdName } from '../../core/api/id-name.inteface';
+import { IdNameApi } from '../../core/api/id-name.api';
+import { AgenciesApi } from '../../core/api/agencies.api';
+import { Agency } from '../../core/api/agency.inteface';
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
-  FormGroup,
   Validators,
 } from '@angular/forms';
 
@@ -17,19 +18,14 @@ import {
   styleUrls: ['./new-agency.form.css'],
 })
 export class NewAgencyForm extends FormBase implements OnInit {
-  public ranges = [
-    { id: 'Orbital', name: '🌎 Orbiting around the earth' },
-    {
-      id: 'Interplanetary',
-      name: '🌕 To the moon and other planets',
-    },
-    { id: 'Interstellar', name: '💫 Traveling to other stars' },
-  ];
-  public statuses = ['Active', 'Pending'];
+  @Input() public ranges: IdName[]=[];
+  @Input() public statuses: string[] = [];
+  @Output() public save = new EventEmitter<Agency>();
 
   constructor(formBuilder: FormBuilder, fms : FormMessagesService,
-      private fus: FormUtilityService) {
+      private fus: FormUtilityService,) {
         super(fms);
+
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       range: new FormControl('', [Validators.required]),
@@ -43,6 +39,7 @@ export class NewAgencyForm extends FormBase implements OnInit {
     const id = this.getDashIdAgency(name);
     const newAgencyData = { id, name, range, status };
     console.warn('Send agency data ', newAgencyData);
+    this.save.emit(newAgencyData);
   }
 
   private getDashIdAgency(str: string): string {

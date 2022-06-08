@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { TripRoutingModule } from './trip-routing.module';
 import { TripPage } from './trip.page';
+import { TripView } from './trip.view';
 
 
 @NgModule({
   declarations: [
-    TripPage
+    TripPage,
+    TripView
   ],
   imports: [
     CommonModule,
