@@ -20,7 +20,9 @@ export class HomePage implements OnInit {
 
 
   constructor(private agenciesApi: AgenciesApi, private tripsApi: TripsApi) {
-    this.agencies = agenciesApi.getAll();
+    agenciesApi.getAll().subscribe( (data) => {
+      this.agencies = data;
+    });
     this.trips = tripsApi.getAll();
   }
 

@@ -12,11 +12,13 @@ import { AgenciesApi } from '../../core/api/agencies.api';
 })
 export class NewTripPage implements OnInit {
 
-  public agencies: Agency[];
+  public agencies!: Agency[];
   public statuses: string[];
 
   constructor(idNameApi: IdNameApi, private tripsApi: TripsApi, agenciesApi: AgenciesApi) {
-    this.agencies = agenciesApi.getAll();
+    agenciesApi.getAll().subscribe( (data) => {
+      this.agencies = data;
+    });
     this.statuses = idNameApi.getStatuses();
    }
 

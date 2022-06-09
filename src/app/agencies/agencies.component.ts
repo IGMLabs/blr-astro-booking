@@ -13,14 +13,18 @@ export class AgenciesComponent implements OnInit {
 
 
   constructor(private agenciesApi: AgenciesApi) {
-    this.agencies = agenciesApi.getAll();
+    this.agenciesApi.getAll().subscribe( ( data ) => {
+       this.agencies = data
+      });
   }
 
   ngOnInit(): void {
   }
 
   onReload(){
-    this.agencies = this.agenciesApi.getAll();
+    this.agenciesApi.getAll().subscribe( ( data ) => {
+      this.agencies = data
+     });
   }
 
 }
