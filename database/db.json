@@ -93,6 +93,15 @@
       "status": "Waiting",
       "extraLuggagePricePerKilo": 0,
       "premiumFoodPrice": 1000
+    },
+    {
+      "id": "marte-space-y",
+      "destination": "Marte",
+      "agencyId": "space-y",
+      "places": 6,
+      "flightPrice": 1000000,
+      "startDate": "2020-12-20",
+      "endDate": "2023-12-22"
     }
   ]
 }

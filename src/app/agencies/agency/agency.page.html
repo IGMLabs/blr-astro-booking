@@ -1,3 +1,8 @@
 
-<app-agency-view [agencyId]="agencyId" [agency]="agency">
+<app-agency-view *ngIf="(agency$ | async) as agency ; else esperando"
+                [agencyId]="agencyId" [agency]="agency">
 </app-agency-view>
+
+<ng-template #esperando>
+  <h5>Waiting...</h5>
+  </ng-template>

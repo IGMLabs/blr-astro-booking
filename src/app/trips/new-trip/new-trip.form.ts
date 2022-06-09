@@ -28,7 +28,7 @@ export class NewTripForm extends FormBase implements OnInit {
     ,fms : FormMessagesService, private fus: FormUtilityService,
     private agenciesApi: AgenciesApi, private tripsApi:TripsApi) {
       super(fms);
-      agenciesApi.getAll().subscribe( (data) => {
+      agenciesApi.getAll$().subscribe( (data) => {
         this.agencies = data;
       });
     this.form = formBuilder.group(
@@ -87,7 +87,7 @@ export class NewTripForm extends FormBase implements OnInit {
       endDate,
     };
     console.warn('Send trip data ', newTripData);
-    this.tripsApi.post(newTripData);
+    // this.tripsApi.post(newTripData);
     this.save.emit(newTripData);
   }
   ngOnInit(): void {}

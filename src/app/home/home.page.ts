@@ -15,15 +15,17 @@ export class HomePage implements OnInit {
 
   public reloading = false;
 
-  public trips: Trips[]
+  public trips!: Trips[]
   public agencies!: Agency[]
 
 
   constructor(private agenciesApi: AgenciesApi, private tripsApi: TripsApi) {
-    agenciesApi.getAll().subscribe( (data) => {
+    agenciesApi.getAll$().subscribe( (data) => {
       this.agencies = data;
     });
-    this.trips = tripsApi.getAll();
+    tripsApi.getAll().subscribe( (data) => {
+      this.trips = data;
+    });;
   }
 
 

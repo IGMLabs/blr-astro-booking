@@ -16,7 +16,7 @@ export class NewTripPage implements OnInit {
   public statuses: string[];
 
   constructor(idNameApi: IdNameApi, private tripsApi: TripsApi, agenciesApi: AgenciesApi) {
-    agenciesApi.getAll().subscribe( (data) => {
+    agenciesApi.getAll$().subscribe( (data) => {
       this.agencies = data;
     });
     this.statuses = idNameApi.getStatuses();
@@ -26,6 +26,6 @@ export class NewTripPage implements OnInit {
   }
 
   onSave(newTripData: Trips){
-    this.tripsApi.post(newTripData);
+    this.tripsApi.post(newTripData).subscribe();
   }
 }

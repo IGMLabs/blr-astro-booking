@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import {HttpClient} from '@angular/common/http';
 
 import { Agency } from './agency.inteface';
+import { Observable } from "rxjs";
 
 
 
@@ -14,7 +15,7 @@ export class AgenciesApi {
 
   }
 
-  public getAll(){
+  public getAll$(): Observable<Agency[]>{
     return this.http.get<Agency[]>('http://localhost:3000/agencies');
   }
 
@@ -22,8 +23,8 @@ export class AgenciesApi {
     return this.http.post('http://localhost:3000/agencies', agency);
   }
 
-  public getById(id:string){
-    return this.http.get<Agency>('http://localhost:3000/agencies' + id);
+  public getById$(id:string): Observable<Agency>{
+    return this.http.get<Agency>('http://localhost:3000/agencies/' + id);
   }
 
 

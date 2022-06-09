@@ -4,4 +4,10 @@
   <a role="button"
      routerLink="trip/new">🚀 Add a new trip</a>
 </nav>
- <app-trips-list [trips]="trips" (reload)="onReload()"></app-trips-list>
+ <app-trips-list *ngIf="(trips$ | async) as trips ; else esperando"
+            [trips]="trips" (reload)="onReload()"></app-trips-list>
+
+<ng-template #esperando>
+<h5>Waiting...</h5>
+</ng-template>
+<h4 *ngIf="error">Ha habido un error</h4>
