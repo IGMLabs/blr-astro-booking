@@ -2,30 +2,32 @@ import { Injectable } from "@angular/core";
 import {HttpClient} from '@angular/common/http';
 
 import { Agency } from './agency.inteface';
-import { Observable } from "rxjs";
+import { CrudApi } from './crud.api';
+import { StatusStore } from './status.store';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AgenciesApi {
+export class AgenciesApi extends CrudApi<Agency> {
 
-  constructor(private http: HttpClient) {
-
+  // private url = environment.apiUrl + 'agencies/';
+  constructor( http: HttpClient, statusStore: StatusStore) {
+    super(http, 'agencies', statusStore);
   }
 
-  public getAll$(): Observable<Agency[]>{
-    return this.http.get<Agency[]>('http://localhost:3000/agencies');
-  }
+  // public getAll$(): Observable<Agency[]>{
+  //   return this.http.get<Agency[]>(this.url);
+  // }
 
-  public post(agency: Agency){
-    return this.http.post('http://localhost:3000/agencies', agency);
-  }
+  // public post(agency: Agency){
+  //   return this.http.post(this.url, agency);
+  // }
 
-  public getById$(id:string): Observable<Agency>{
-    return this.http.get<Agency>('http://localhost:3000/agencies/' + id);
-  }
+  // public getById$(id:string): Observable<Agency>{
+  //   return this.http.get<Agency>(this.url + id);
+  // }
 
 
 }

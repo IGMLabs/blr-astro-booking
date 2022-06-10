@@ -15,3 +15,4 @@ export interface Trips {
     extraLuggagePricePerKilo?:number;
     premiumFoodPrice?: number;
 }
+

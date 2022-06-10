@@ -28,9 +28,9 @@ export class NewTripForm extends FormBase implements OnInit {
     ,fms : FormMessagesService, private fus: FormUtilityService,
     private agenciesApi: AgenciesApi, private tripsApi:TripsApi) {
       super(fms);
-      agenciesApi.getAll$().subscribe( (data) => {
-        this.agencies = data;
-      });
+      // agenciesApi.getAll$().subscribe( (data) => {
+      //   this.agencies = data;
+      // });
     this.form = formBuilder.group(
       {
         destination: new FormControl('', [

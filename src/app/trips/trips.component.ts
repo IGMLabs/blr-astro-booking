@@ -14,14 +14,14 @@ export class TripsComponent implements OnInit {
   public error: boolean = false;
 
   constructor(private tripsApi: TripsApi) {
-    this.trips$ = tripsApi.getAll();
+    this.trips$ = tripsApi.getAll$();
   }
 
   ngOnInit(): void {
   }
 
   onReload(){
-    this.tripsApi.getAll().subscribe( ( data ) => {
+    this.tripsApi.getAll$().subscribe( ( data ) => {
       // this.trips = data
      },
      (err)=>{

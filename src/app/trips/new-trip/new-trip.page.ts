@@ -4,6 +4,7 @@ import { TripsApi } from '../../core/api/trips.api';
 import { Trips } from '../../core/api/trips.inteface';
 import { IdNameApi } from '../../core/api/id-name.api';
 import { AgenciesApi } from '../../core/api/agencies.api';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-trip',
@@ -12,13 +13,11 @@ import { AgenciesApi } from '../../core/api/agencies.api';
 })
 export class NewTripPage implements OnInit {
 
-  public agencies!: Agency[];
+  public agencies$!: Observable<Agency[]>;
   public statuses: string[];
 
   constructor(idNameApi: IdNameApi, private tripsApi: TripsApi, agenciesApi: AgenciesApi) {
-    agenciesApi.getAll$().subscribe( (data) => {
-      this.agencies = data;
-    });
+    this.agencies$ = agenciesApi.getAll$();
     this.statuses = idNameApi.getStatuses();
    }
 

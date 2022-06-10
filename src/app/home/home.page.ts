@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { TripsApi } from '../core/api/trips.api';
 import { Trips } from '../core/api/trips.inteface';
 import { Agency } from '../core/api/agency.inteface';
 import { AgenciesApi } from '../core/api/agencies.api';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
-  styleUrls: ['./home.page.css']
+  styleUrls: ['./home.page.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePage implements OnInit {
 
@@ -15,17 +17,13 @@ export class HomePage implements OnInit {
 
   public reloading = false;
 
-  public trips!: Trips[]
-  public agencies!: Agency[]
+  public trips$!: Observable<Trips[]>
+  public agencies$!: Observable<Agency[]>
 
 
   constructor(private agenciesApi: AgenciesApi, private tripsApi: TripsApi) {
-    agenciesApi.getAll$().subscribe( (data) => {
-      this.agencies = data;
-    });
-    tripsApi.getAll().subscribe( (data) => {
-      this.trips = data;
-    });;
+    this.agencies$= agenciesApi.getAll$();
+    this.trips$ = tripsApi.getAll$();
   }
 
 

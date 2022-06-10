@@ -1,7 +1,14 @@
 
+<ng-container>
+<app-agencies-list *ngIf="(agencies$ |async) as agencies"
+              [agencies]="agencies"></app-agencies-list>
+</ng-container>
 
-<app-agencies-list [agencies]="agencies"></app-agencies-list>
 
-<app-trips-list [trips]="trips"></app-trips-list>
+<ng-container>
+<app-trips-list *ngIf="(trips$ | async )as trips"
+            [trips]="trips"></app-trips-list>
+</ng-container>
+
 
 <app-reloading *ngIf="reloading"></app-reloading>
