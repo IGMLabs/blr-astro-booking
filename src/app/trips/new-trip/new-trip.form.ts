@@ -26,7 +26,7 @@ export class NewTripForm extends FormBase implements OnInit {
 
   constructor(formBuilder: FormBuilder, fvs: FormValidationsService
     ,fms : FormMessagesService, private fus: FormUtilityService,
-    private agenciesApi: AgenciesApi, private tripsApi:TripsApi) {
+    private agenciesApi: AgenciesApi) {
       super(fms);
       // agenciesApi.getAll$().subscribe( (data) => {
       //   this.agencies = data;

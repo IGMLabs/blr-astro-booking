@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Agency } from '../../core/api/agency.inteface';
 import { AgenciesApi } from '../../core/api/agencies.api';
 import { Observable } from 'rxjs';
-import { Trips } from '../../core/api/trips.inteface';
 
 @Component({
   selector: 'app-agency',

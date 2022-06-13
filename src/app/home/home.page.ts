@@ -4,6 +4,8 @@ import { Trips } from '../core/api/trips.inteface';
 import { Agency } from '../core/api/agency.inteface';
 import { AgenciesApi } from '../core/api/agencies.api';
 import { Observable } from 'rxjs';
+import { BookingsApi } from '../core/api/bookings.api';
+import { Booking } from '../core/api/booking.interface';
 
 @Component({
   selector: 'app-home',
@@ -19,11 +21,14 @@ export class HomePage implements OnInit {
 
   public trips$!: Observable<Trips[]>
   public agencies$!: Observable<Agency[]>
+  public bookings$!: Observable<Booking[]>
 
 
-  constructor(private agenciesApi: AgenciesApi, private tripsApi: TripsApi) {
+  constructor(private agenciesApi: AgenciesApi, private tripsApi: TripsApi,
+              private bookingsApi: BookingsApi) {
     this.agencies$= agenciesApi.getAll$();
     this.trips$ = tripsApi.getAll$();
+    this.bookings$ = bookingsApi.getAll$();
   }
 
 

@@ -1,0 +1,15 @@
+<nav>
+  <a role="button"
+     routerLink="booking/new">✨ Add a new booking</a>
+</nav>
+<!-- <app-agencies-list *ngIf="agencies; else esperando"
+      [agencies]="agencies" (reload)="onReload()" ></app-agencies-list> -->
+
+
+<app-bookings-list *ngIf="(bookings$ | async) as booking ; else esperando"
+      [bookings]="booking" (reload)="onReload()" ></app-bookings-list>
+
+<ng-template #esperando>
+<h5>Waiting...</h5>
+</ng-template>
+ <h4 *ngIf="error">Ha habido un error</h4>

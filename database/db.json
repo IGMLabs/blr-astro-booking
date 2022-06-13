@@ -1,6 +1,31 @@
 {
   "users": [],
-  "bookings": [],
+  "bookings": [
+    {
+      "id": "luis",
+      "tripId": "space-y-mars-2",
+      "passengerName": "Luis",
+      "date": "2222-01-12",
+      "luggageKilos": 15,
+      "hasPremiumFoodPrice": true
+    },
+    {
+      "id": "luis-jorge",
+      "tripId": "space-y-moon-1",
+      "passengerName": "Luis Jorge",
+      "date": "2022-06-12",
+      "luggageKilos": 12,
+      "hasPremiumFoodPrice": true
+    },
+    {
+      "id": "luis-jorge-rubido",
+      "tripId": "green-origin-low-orbit-3",
+      "passengerName": "Luis Jorge Rubido",
+      "date": "2022-06-14",
+      "luggageKilos": 12,
+      "hasPremiumFoodPrice": true
+    }
+  ],
   "agencies": [
     {
       "id": "space-y",

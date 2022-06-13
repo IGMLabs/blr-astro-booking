@@ -11,4 +11,9 @@
 </ng-container>
 
 
+<ng-container>
+  <app-bookings-list *ngIf="(bookings$ | async )as booking"
+              [bookings]="booking"></app-bookings-list>
+  </ng-container>
+
 <app-reloading *ngIf="reloading"></app-reloading>
