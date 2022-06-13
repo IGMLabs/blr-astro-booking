@@ -21,12 +21,6 @@ export class BookingsPage implements OnInit {
  }
 
  onReload(){
-   this.bookingsApi.getAll$().subscribe( ( data ) => {
-     // this.agencies = data
-    },
-    (err)=>{
-      console.log('hay un fallo', err.message);
-      this.error = true;
-    });
+   this.bookings$ = this.bookingsApi.getAll$();
  }
 }

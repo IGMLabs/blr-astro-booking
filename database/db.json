@@ -24,6 +24,14 @@
       "date": "2022-06-14",
       "luggageKilos": 12,
       "hasPremiumFoodPrice": true
+    },
+    {
+      "id": "bruno-lopez",
+      "tripId": "green-origin-low-orbit-3",
+      "passengerName": "Bruno Lopez",
+      "date": "2025-12-20",
+      "luggageKilos": 15,
+      "hasPremiumFoodPrice": false
     }
   ],
   "agencies": [

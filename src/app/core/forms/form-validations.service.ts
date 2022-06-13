@@ -44,8 +44,8 @@ export class FormValidationsService {
     return null;
   }
 
-  dateControlBookings(form: AbstractControl): ValidationErrors | null {
-    const date = form.get('date')?.value;
+  dateControlBookings(control: AbstractControl): ValidationErrors | null {
+    const date = control.value;
     const dateTo = new Date();
     if (!date) {
       return {

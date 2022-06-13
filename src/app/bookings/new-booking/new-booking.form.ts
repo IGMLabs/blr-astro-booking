@@ -24,13 +24,13 @@ export class NewBookingForm extends FormBase implements OnInit {
     this.form = formBuilder.group({
       tripId: new FormControl('', [Validators.required] ),
       passengerName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)], ),
-      date: new FormControl('', [Validators.required], ),
+      date: new FormControl('', [Validators.required, fvs.dateControlBookings], ),
       luggageKilos: new FormControl('', [Validators.required, Validators.min(0), Validators.max(15)], ),
       hasPremiumFoodPrice: new FormControl(true,  ),
 
     },
     {
-      validators: [fvs.dateControlBookings],
+      validators: [],
     }
     );
   }
