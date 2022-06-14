@@ -28,7 +28,7 @@ export class EmailControl extends FormBase implements OnInit, ControlValueAccess
 
   writeValue(value: any): void {
   //  super.form.get('email')?.setValue(value);
-   super.form.setValue({email:value}, {emitEvent: false});
+   this.form.setValue({email:value}, {emitEvent: false});
   }
   registerOnChange(changeCallback: any): void {
     this.form.valueChanges.subscribe(changeCallback);

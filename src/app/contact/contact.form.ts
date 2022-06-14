@@ -26,7 +26,7 @@ export class ContactForm extends FormBase implements OnInit {
        super(fms);
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)], ),
-      email: new FormControl('', [Validators.required, Validators.email], ),
+      email: new FormControl('', ),
       message: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(50)], ),
 
     });
@@ -38,6 +38,8 @@ export class ContactForm extends FormBase implements OnInit {
   onSave(){
     const contact = this.form.value;
     console.log(contact);
+    const contactModificado = {...contact, email: contact.email.email};
+    console.log(contactModificado);
   }
 
 
