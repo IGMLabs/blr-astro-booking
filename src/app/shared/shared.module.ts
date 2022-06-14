@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BookingsList } from './components/bookings/bookings.list';
 import { EmailControl } from './controls/email/email.control';
+import { TemplateControl } from './controls/template/template.control';
 
 
 
@@ -16,7 +17,8 @@ import { EmailControl } from './controls/email/email.control';
     AgenciesList,
     TripsList,
     BookingsList,
-    EmailControl
+    EmailControl,
+    TemplateControl
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { EmailControl } from './controls/email/email.control';
     TripsList,
     BookingsList,
     ReactiveFormsModule,
-    EmailControl
+    EmailControl,
+    TemplateControl
   ]
 })
 export class SharedModule { }

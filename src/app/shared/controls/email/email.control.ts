@@ -21,7 +21,7 @@ export class EmailControl extends FormBase implements OnInit, ControlValueAccess
   formControlName:string ='email';
   constructor(fms: FormMessagesService) {
     super(fms);
-    super.form =  new FormGroup({
+    this.form =  new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email], ),
     });
    }

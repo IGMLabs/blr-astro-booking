@@ -1,0 +1,13 @@
+
+<div>
+  <label [for]="formControlName">{{label}}</label>
+  <input [type]="inputType"
+         [id]="formControlName"
+         [name]="formControlName"
+         [value]="value"
+         [placeholder]="placeHolder"
+         [attr.aria-invalid]="hasError(formControlName)"
+         (keyup)="onKeyUp($event)"
+         (blur)="touchedCallback()">
+    <small *ngIf="mustShowMessage(formControlName)"> {{getErrorMessage(formControlName)}} </small>
+</div>
