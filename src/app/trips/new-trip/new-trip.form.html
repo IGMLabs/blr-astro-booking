@@ -1,13 +1,9 @@
 
 <form [formGroup]="form">
-  <div>
-    <label for="destination"> Destination Name</label>
-    <input name="destination"
-           type="text"
-           formControlName="destination"
-           [attr.aria-invalid]="hasError('destination')">
-    <small *ngIf="mustShowMessage('destination')">{{ getErrorMessage('destination') }}</small>
-  </div>
+
+  <app-template-control [form]="form" formControlName="destination"
+  label=" Destination Name" placeHolder="Your Destination"> </app-template-control>
+
   <div>
     <label for="agencyId"> Agency Id</label>
     <select name="agencyId"
@@ -18,39 +14,19 @@
     </select>
     <small *ngIf="mustShowMessage('agencyId')">{{ getErrorMessage('agencyId') }}</small>
   </div>
-  <div>
-    <label for="places"> Places</label>
-    <input name="places"
-           type="number"
-           formControlName="places"
-           [attr.aria-invalid]="hasError('places')">
-    <small *ngIf="mustShowMessage('places')">{{ getErrorMessage('places') }}</small>
-  </div>
-  <div>
-    <label for="flightPrice"> Price</label>
-    <input name="flightPrice"
-           type="number"
-           formControlName="flightPrice"
-           [attr.aria-invalid]="hasError('flightPrice')">
-    <small *ngIf="mustShowMessage('flightPrice')">{{ getErrorMessage('flightPrice') }}</small>
-  </div>
-  <div>
-    <label for="startDate"> Date from</label>
-    <input name="startDate"
-           type="date"
-           formControlName="startDate"
-           [attr.aria-invalid]="hasError('startDate')">
-    <small *ngIf="mustShowMessage('startDate')">{{ getErrorMessage('startDate') }}</small>
-  </div>
-  <div>
-    <label for="endDate"> Date to</label>
-    <input name="endDate"
-           type="date"
-           formControlName="endDate"
-           [attr.aria-invalid]="hasError('endDate')">
-    <small *ngIf="mustShowMessage('endDate')">{{ getErrorMessage('endDate') }}</small>
-    <small > {{getDateMessage()}} </small>
-  </div>
+
+  <app-template-control [form]="form" formControlName="places"
+  label="Places" placeHolder="" inputType="number"> </app-template-control>
+
+  <app-template-control [form]="form" formControlName="flightPrice"
+  label="Price" placeHolder="" inputType="number"> </app-template-control>
+
+  <app-template-control [form]="form" formControlName="startDate"
+  label="Date from" placeHolder="" inputType="date"> </app-template-control>
+
+  <app-template-control [form]="form" formControlName="endDate"
+  label="Date to" placeHolder="" inputType="date"> </app-template-control>
+
 
 
   <button [disabled]="form.invalid"

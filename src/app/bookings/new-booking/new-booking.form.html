@@ -11,40 +11,19 @@
     </select>
     <small *ngIf="mustShowMessage('tripId')">{{ getErrorMessage('tripId') }}</small>
   </div>
-  <div>
-    <label for="passengerName"> Passenger Name</label>
-    <input name="passengerName"
-           type="text"
-           formControlName="passengerName"
-           [attr.aria-invalid]="hasError('passengerName')">
-    <small *ngIf="mustShowMessage('passengerName')">{{ getErrorMessage('passengerName') }}</small>
-  </div>
 
-  <div>
-    <label for="date"> Date</label>
-    <input name="date"
-           type="date"
-           formControlName="date"
-           [attr.aria-invalid]="hasError('date')">
-    <small *ngIf="mustShowMessage('date')">{{ getErrorMessage('date') }}</small>
-    <small > {{getDateMessage()}} </small>
-  </div>
-  <div>
-    <label for="luggageKilos"> Kg</label>
-    <input name="luggageKilos"
-           type="number"
-           formControlName="luggageKilos"
-           [attr.aria-invalid]="hasError('luggageKilos')">
-    <small *ngIf="mustShowMessage('luggageKilos')">{{ getErrorMessage('luggageKilos') }}</small>
-  </div>
-  <div>
-    <label for="hasPremiumFoodPrice"> Premium Food</label>
-    <input name="hasPremiumFoodPrice"
-           type="checkbox"
-           formControlName="hasPremiumFoodPrice"
-           [attr.aria-invalid]="hasError('hasPremiumFoodPrice')">
-    <small *ngIf="mustShowMessage('hasPremiumFoodPrice')">{{ getErrorMessage('hasPremiumFoodPrice') }}</small>
-  </div>
+  <app-template-control [form]="form" formControlName="passengerName"
+  label="Passenger Name" placeHolder="Your passenger Name" inputType="text"> </app-template-control>
+
+  <app-template-control [form]="form" formControlName="date"
+  label="Date" placeHolder="" inputType="date"> </app-template-control>
+
+  <app-template-control [form]="form" formControlName="luggageKilos"
+  label="Kg" placeHolder="" inputType="number"> </app-template-control>
+
+  <app-template-control [form]="form" formControlName="hasPremiumFoodPrice"
+  label="Premium Food" placeHolder="" inputType="checkbox"> </app-template-control>
+
 
   <button [disabled]="form.invalid"
           (click)="onSubmitClick()">Save</button>

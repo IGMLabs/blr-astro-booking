@@ -32,6 +32,14 @@
       "date": "2025-12-20",
       "luggageKilos": 15,
       "hasPremiumFoodPrice": false
+    },
+    {
+      "id": "sadfadas",
+      "tripId": "green-origin-low-orbit-3",
+      "passengerName": "sadfadas",
+      "date": "2025-12-20",
+      "luggageKilos": "5",
+      "hasPremiumFoodPrice": true
     }
   ],
   "agencies": [
@@ -64,6 +72,12 @@
       "name": "Barrelaflights",
       "range": "Interplanetary",
       "status": "Active"
+    },
+    {
+      "id": "sabadeleflights",
+      "name": "SabadeleFlights",
+      "range": "Interplanetary",
+      "status": null
     }
   ],
   "trips": [
@@ -135,6 +149,15 @@
       "flightPrice": 1000000,
       "startDate": "2020-12-20",
       "endDate": "2023-12-22"
+    },
+    {
+      "id": "jupiter-green-origin",
+      "destination": "Jupiter",
+      "agencyId": "green-origin",
+      "places": "5",
+      "flightPrice": "9999999",
+      "startDate": "2021-12-12",
+      "endDate": "2023-12-12"
     }
   ]
 }

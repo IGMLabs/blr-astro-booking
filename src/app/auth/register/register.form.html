@@ -1,44 +1,19 @@
 <form [formGroup]="form">
-  <div>
-    <label for="name">Name</label>
-    <input type="text"
-           id="name"
-           name="name"
-           formControlName="name"
-           placeholder="Your name"
-           [attr.aria-invalid]="hasError('name')">
-      <small *ngIf="mustShowMessage('name')"> {{getErrorMessage('name')}} </small>
-  </div>
+
+  <app-template-control [form]="form" formControlName="name"
+  label="Name" placeHolder="Your Name"> </app-template-control>
+
   <app-email-control formControlName="email"></app-email-control>
 
-  <div>
-    <label for="password">Password</label>
-    <input type="password"
-           id="password"
-           name="password"
-           formControlName="password"
-           [attr.aria-invalid]="hasError('password')">
-      <small *ngIf="mustShowMessage('password')"> {{getErrorMessage('password')}} </small>
-  </div>
-  <div>
-    <label for="confirmPassword">Confirm Password</label>
-    <input type="password"
-           id="confirmPassword"
-           name="confirmPassword"
-           formControlName="confirmPassword"
-           [attr.aria-invalid]="hasError('confirmPassword')">
-      <small *ngIf="mustShowMessage('confirmPassword')"> {{getErrorMessage('confirmPassword')}} </small>
-      <small > {{getPasswordMatchMessage()}} </small>
-  </div>
-  <div>
-    <input type="checkbox"
-           id="acceptTerms"
-           name="acceptTerms"
-           formControlName="acceptTerms"
-           [attr.aria-invalid]="hasError('acceptTerms')">
-    <label for="acceptTerms">I read Terms & Conditions</label>
-      <small *ngIf="mustShowMessage('acceptTerms')"> {{getErrorMessage('acceptTerms')}} </small>
-  </div>
+  <app-template-control [form]="form" formControlName="password"
+  label="Password" placeHolder="Your Password" inputType="password"> </app-template-control>
+
+  <app-template-control [form]="form" formControlName="confirmPassword"
+  label="Confirm your password" placeHolder="Confirm your password" inputType="password"> </app-template-control>
+
+  <app-template-control [form]="form" formControlName="acceptTerms"
+  label="I read Terms & Conditions" placeHolder="" inputType="checkbox"> </app-template-control>
+
   <pre>
     {{form.errors | json}}
   </pre>
