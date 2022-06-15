@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Agency } from '../../../core/api/agency.inteface';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,9 @@ export class AgenciesList implements OnInit {
 
   public reloading = false;
 
+constructor(private router: Router, private activeRoute: ActivatedRoute) {
 
+}
 
   public onReloadClick(list: string){
     console.log("reloading...");
@@ -22,6 +25,19 @@ export class AgenciesList implements OnInit {
     this.reload.emit();
 
   }
+
+
+  public onSearchClick(agencyId : string){
+    this.router.navigate([],
+      {
+        relativeTo: this.activeRoute,
+        queryParams: {q: agencyId},
+        queryParamsHandling: 'merge'
+      } )
+
+
+  }
+
 
   public getAgenciesLength(){
     return this.agencies.length;

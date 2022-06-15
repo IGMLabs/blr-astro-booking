@@ -4,6 +4,12 @@
   <a role="button"
      routerLink="trip/new">🚀 Add a new trip</a>
 </nav>
+
+<br>
+
+<app-search (search)="onSearch($event)"></app-search>
+
+
  <app-trips-list *ngIf="(trips$ | async) as trips ; else esperando"
             [trips]="trips" (reload)="onReload()"></app-trips-list>
 

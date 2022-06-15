@@ -4,6 +4,9 @@
   <h3> Working with {{getAgenciesLength()}} agencies </h3>
   <ul>
     <li *ngFor="let agencia of agencies">
+      <a [routerLink]="['.']" [queryParams]="{ q: agencia.id }"
+      queryParamsHandling="merge">👁</a>
+      <span (click)="onSearchClick(agencia.id )"> 📡 </span>
        <a [routerLink]="['/','agencies','agency',agencia.id]"
         routerLinkActive="router-link-active"  [ngClass]="agencia.status | lowercase">
         {{ agencia.name }}
@@ -15,3 +18,6 @@
   </ul>
   <button (click)="onReloadClick('agencies')"> ♻ </button>
 </article>
+
+
+

@@ -13,9 +13,21 @@
 
 
 <app-agencies-list *ngIf="(agencies$ | async) as agencies ; else esperando"
-      [agencies]="agencies" (reload)="onReload()" ></app-agencies-list>
+      [agencies]="agencies" (reload)="onReload()" >
+</app-agencies-list>
+
+
+<app-trips-list *ngIf="(trips$ | async) as trips; else chooseAnOption" [trips]="trips">
+
+</app-trips-list>
 
 <ng-template #esperando>
 <h5>Waiting...</h5>
 </ng-template>
+
+<ng-template #chooseAnOption>
+  <h5>Click on a eye...</h5>
+  </ng-template>
  <h4 *ngIf="error">Ha habido un error</h4>
+
+
