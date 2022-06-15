@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import { Agency } from './agency.inteface';
 import { CrudApi } from './crud.api';
 import { StatusStore } from './status.store';
+import { delay, Observable } from 'rxjs';
 
 
 
@@ -15,6 +16,12 @@ export class AgenciesApi extends CrudApi<Agency> {
   // private url = environment.apiUrl + 'agencies/';
   constructor( http: HttpClient, statusStore: StatusStore) {
     super(http, 'agencies', statusStore);
+  }
+
+  public getByText$ (text:string | null):Observable<Agency[]>{
+
+    if(text === null){return this.getAll$();}
+    return this.http.get<Agency[]>(this.url + '?q=' + text).pipe(delay(1000));
   }
 
   // public getAll$(): Observable<Agency[]>{

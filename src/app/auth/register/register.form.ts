@@ -20,7 +20,7 @@ export class RegisterForm extends FormBase implements OnInit {
       email: new FormControl('', ),
       password: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(15)], ),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(15)], ),
-      acceptTerms: new FormControl(false, [Validators.required], ),
+      acceptTerms: new FormControl(false, [Validators.requiredTrue], ),
     },{
       validators: [fvs.passwordMatch],
     });

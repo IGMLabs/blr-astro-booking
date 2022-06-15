@@ -7,7 +7,7 @@
 </nav>
 <br>
 
-<app-search></app-search>
+<app-search (search)="onSearch($event)"></app-search>
 <!-- <app-agencies-list *ngIf="agencies; else esperando"
       [agencies]="agencies" (reload)="onReload()" ></app-agencies-list> -->
 

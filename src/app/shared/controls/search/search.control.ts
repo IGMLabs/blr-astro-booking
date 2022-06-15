@@ -25,7 +25,7 @@ export class SearchControl implements OnInit {
         return (event as any).target.value
       }),
       tap((searchTerm)=> console.log('antes',searchTerm)),
-      debounceTime(1000),
+      debounceTime(500),
       tap((searchTerm)=> console.log('despues',searchTerm)),
       filter((search)=>search.length > 2 ),
       tap((searchTerm)=> console.log('filtrado',searchTerm)),

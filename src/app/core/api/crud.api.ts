@@ -8,14 +8,14 @@ import { StatusStore } from './status.store';
 export abstract class CrudApi<T> {
 
 
-  private url = environment.apiUrl + this.endPoint + '/';
+  protected url = environment.apiUrl + this.endPoint + '/';
   private statusPipe = pipe(tap(()=>this.notifyIdle()),
   catchError((err)=> {
     this.notifyError(err.message);
     return of(err);
   }));
 
-  constructor(private http: HttpClient, private endPoint: string,
+  constructor(protected http: HttpClient, protected endPoint: string,
         protected statusStore: StatusStore) {
 
   }
