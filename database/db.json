@@ -1,5 +1,18 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "asd@asd",
+      "password": "$2a$10$W0/Y/JOufEuxB1bczzp3VOKcTxHwWCjHQRvCl44bE6TxzWzEzbt..",
+      "name": "perrito",
+      "id": 1
+    },
+    {
+      "email": "bru@no",
+      "password": "$2a$10$M3LpTByTPy1AfhzuesA7rO2aVCuNIIfgAEPaR969SZ7aiBN.njPwy",
+      "name": "bruno",
+      "id": 2
+    }
+  ],
   "bookings": [
     {
       "id": "luis",

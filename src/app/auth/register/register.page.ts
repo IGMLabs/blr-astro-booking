@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Register } from '../api/register.interface';
+import { AuthApi } from '../api/auth.api';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPage implements OnInit {
 
-  constructor() { }
+  constructor(private authApi: AuthApi) { }
 
   ngOnInit(): void {
+  }
+
+  onRegister(register: Register) {
+    this.authApi
+      .register$(register)
+      .pipe(tap((response) => console.warn(response)))
+      .subscribe();
   }
 
 }

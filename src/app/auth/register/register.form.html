@@ -11,8 +11,19 @@
   <app-template-control [form]="form" formControlName="confirmPassword"
   label="Confirm your password" placeHolder="Confirm your password" inputType="password"> </app-template-control>
 
-  <app-template-control [form]="form" formControlName="acceptTerms"
-  label="I read Terms & Conditions" placeHolder="" inputType="checkbox"> </app-template-control>
+  <!-- <app-template-control [form]="form" formControlName="acceptTerms"
+  label="I read Terms & Conditions" placeHolder="" inputType="checkbox"> </app-template-control> -->
+
+
+  <div>
+    <input type="checkbox"
+           id="acceptTerms"
+           name="acceptTerms"
+           formControlName="acceptTerms"
+           [attr.aria-invalid]="hasError('acceptTerms')">
+    <label for="acceptTerms">Accept Terms </label>
+    <small *ngIf="mustShowMessage('acceptTerms')">{{ getErrorMessage('acceptTerms') }} </small>
+  </div>
 
   <pre>
     {{form.errors | json}}
