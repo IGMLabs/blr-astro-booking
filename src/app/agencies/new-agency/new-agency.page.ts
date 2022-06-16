@@ -26,7 +26,7 @@ export class NewAgencyPage implements OnInit {
 
   onSave(newAgencyData: Agency){
     this.agenciesApi.post(newAgencyData).subscribe( () => {
-      this.router.navigate(['/agencies']);
+      // this.router.navigate(['/agencies']);
     });
 
   }
