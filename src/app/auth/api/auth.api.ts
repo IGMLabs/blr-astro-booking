@@ -5,6 +5,7 @@ import { Login } from './login.interface';
 import { environment } from "src/environments/environment";
 import { tap } from 'rxjs';
 import { AuthResponse } from './response.interface';
+import { StorageBase } from '../../core/utils/storage.base';
 
 
 
@@ -19,16 +20,24 @@ export class AuthApi{
 
   public accessToken = '';
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient, private storage : StorageBase) {
+    this.accessToken = storage.getToken();
+  }
 
   public register$(register: Register) {
     return this.http.post<AuthResponse>(this.url + 'register', register)
-    .pipe(tap(response => this.accessToken = response.accessToken ));
+    .pipe(tap(response => {
+      this.accessToken = response.accessToken;
+      this.storage.setToken(this.accessToken);
+    } ));
   }
 
   public login$(login: Login) {
     return this.http.post<AuthResponse>(this.url + 'login', login)
-    .pipe(tap(response => this.accessToken = response.accessToken ));
+    .pipe(tap(response =>  {
+      this.accessToken = response.accessToken;
+      this.storage.setToken(this.accessToken);
+    } ));
   }
 
 
