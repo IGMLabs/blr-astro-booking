@@ -1,10 +1,11 @@
+import { Storage } from './storage.interface';
 
 
 
 
 
 
-export class SessionStorage {
+export class SessionStorage implements Storage{
 
   private readonly tokenKey = 'accessToken';
 

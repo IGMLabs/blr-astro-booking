@@ -1,9 +1,10 @@
+import { Storage } from './storage.interface';
 
 
 
 
 
-export class LocalStorage {
+export class LocalStorage implements Storage{
 
   private readonly tokenKey = 'accessToken';
 
