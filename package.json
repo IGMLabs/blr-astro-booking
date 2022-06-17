@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "api": "json-server-auth ./database/db.json -r ./database/routes.json",
-    "test": "ng test"
+    "test": "ng test",
+    "pwa":"npm run build && npx http-server -p 8087 -c-1 dist/blr-astro-bookings"
   },
   "private": true,
   "dependencies": {

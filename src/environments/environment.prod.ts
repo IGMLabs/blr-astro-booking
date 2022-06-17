@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl:'http://api.hotusa/url'
+  apiUrl:'http://localhost:3000/'
 };
