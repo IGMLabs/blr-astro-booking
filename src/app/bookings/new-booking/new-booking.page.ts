@@ -9,24 +9,25 @@ import { TripsApi } from 'src/app/core/api/trips.api';
 @Component({
   selector: 'app-new-booking',
   templateUrl: './new-booking.page.html',
-  styleUrls: ['./new-booking.page.css']
+  styleUrls: ['./new-booking.page.css'],
 })
 export class NewBookingPage implements OnInit {
-
   public trips$!: Observable<Trips[]>;
 
-  constructor( private bookingApi: BookingsApi,  private router: Router,
-              private tripsApi: TripsApi) {
-      this.trips$ = tripsApi.getAll$();
-   }
-
-  ngOnInit(): void {
+  constructor(
+    private bookingApi: BookingsApi,
+    private router: Router,
+    private tripsApi: TripsApi
+  ) {
+    this.trips$ = tripsApi.getAll$();
   }
 
-  onSave(newBookingData: Booking){
-    this.bookingApi.post(newBookingData).subscribe( () => {
+  ngOnInit(): void {}
+
+  onSave(newBookingData: Booking) {
+    newBookingData.client = newBookingData.passengerName;
+    this.bookingApi.post(newBookingData).subscribe(() => {
       this.router.navigate(['/bookings']);
     });
-
   }
 }

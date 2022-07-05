@@ -1,19 +1,16 @@
-
-
-
-
 <article>
-  <h3> Working with {{bookings.length}} bookings </h3>
+  <h3>Working with {{bookings.length}} bookings</h3>
   <ul>
     <li *ngFor="let booking of bookings">
-       <a [routerLink]="['/','bookings','booking',booking.id]">
-         {{ booking.passengerName}}   </a>
-         <ng-container *ngIf="booking.hasPremiumFoodPrice then interplanetario; else orbital "></ng-container>
-         <ng-template #interplanetario> 🍱 </ng-template>
-         <ng-template #orbital> 🥫 </ng-template>
+      <a [routerLink]="['/','bookings','booking',booking.id]">
+        {{ booking.client}}
+      </a>
+      <ng-container
+        *ngIf="booking.hasPremiumFoodPrice then interplanetario; else orbital "
+      ></ng-container>
+      <ng-template #interplanetario> 🍱 </ng-template>
+      <ng-template #orbital> 🥫 </ng-template>
     </li>
-
   </ul>
-  <button (click)="onReloadClick('bookings')"> ♻ </button>
+  <button (click)="onReloadClick('bookings')">♻</button>
 </article>
-

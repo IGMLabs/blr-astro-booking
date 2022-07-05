@@ -10,36 +10,57 @@ import { FormValidationsService } from '../../core/forms/form-validations.servic
 @Component({
   selector: 'app-new-booking-form',
   templateUrl: './new-booking.form.html',
-  styleUrls: ['./new-booking.form.css']
+  styleUrls: ['./new-booking.form.css'],
 })
 export class NewBookingForm extends FormBase implements OnInit {
-  @Input() public trips: Trips[]=[];
+  @Input() public trips: Trips[] = [];
   @Output() public save = new EventEmitter<Booking>();
 
-  constructor(formBuilder: FormBuilder, fms : FormMessagesService,
+  constructor(
+    formBuilder: FormBuilder,
+    fms: FormMessagesService,
     fvs: FormValidationsService,
-      private fus: FormUtilityService,) {
-        super(fms);
+    private fus: FormUtilityService
+  ) {
+    super(fms);
 
-    this.form = formBuilder.group({
-      tripId: new FormControl('', [Validators.required] ),
-      passengerName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)], ),
-      date: new FormControl('', [Validators.required, fvs.dateControlBookings], ),
-      luggageKilos: new FormControl('', [Validators.required, Validators.min(0), Validators.max(15)], ),
-      hasPremiumFoodPrice: new FormControl(true,  ),
-
-    },
-    {
-      validators: [],
-    }
+    this.form = formBuilder.group(
+      {
+        tripId: new FormControl('', [Validators.required]),
+        passengerName: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(20),
+        ]),
+        date: new FormControl('', [
+          Validators.required,
+          fvs.dateControlBookings,
+        ]),
+        luggageKilos: new FormControl('', [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(15),
+        ]),
+        hasPremiumFoodPrice: new FormControl(true),
+      },
+      {
+        validators: [],
+      }
     );
   }
 
-
   public onSubmitClick() {
-    const {tripId, passengerName, date, luggageKilos, hasPremiumFoodPrice  } = this.form.value;
+    const { tripId, passengerName, date, luggageKilos, hasPremiumFoodPrice } =
+      this.form.value;
     const id = this.getDashIdAgency(passengerName);
-    const newBookingData = { id, tripId, passengerName, date, luggageKilos, hasPremiumFoodPrice };
+    const newBookingData = {
+      id,
+      tripId,
+      passengerName,
+      date,
+      luggageKilos,
+      hasPremiumFoodPrice,
+    };
     console.warn('Send booking data ', newBookingData);
     this.save.emit(newBookingData);
   }

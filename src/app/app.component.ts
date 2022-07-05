@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,10 @@ export class AppComponent {
         : event.latestVersion.hash;
       }
     });
+    interval(1000*60).subscribe(()=> {
 
-    swUpdate.checkForUpdate();
+      swUpdate.checkForUpdate();
+    });
 
   }
 
