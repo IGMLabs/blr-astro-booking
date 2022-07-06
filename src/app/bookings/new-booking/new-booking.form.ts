@@ -26,17 +26,17 @@ export class NewBookingForm extends FormBase implements OnInit {
 
     this.form = formBuilder.group(
       {
-        tripId: new FormControl('', [Validators.required]),
-        passengerName: new FormControl('', [
+        tripId: new FormControl('l56m2nrarawwsxykuai', [Validators.required]),
+        passengerName: new FormControl('De la Vega', [
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(20),
         ]),
-        date: new FormControl('', [
+        date: new FormControl('2056-12-12', [
           Validators.required,
           fvs.dateControlBookings,
         ]),
-        luggageKilos: new FormControl('', [
+        luggageKilos: new FormControl('9', [
           Validators.required,
           Validators.min(0),
           Validators.max(15),
@@ -52,9 +52,8 @@ export class NewBookingForm extends FormBase implements OnInit {
   public onSubmitClick() {
     const { tripId, passengerName, date, luggageKilos, hasPremiumFoodPrice } =
       this.form.value;
-    const id = this.getDashIdAgency(passengerName);
+    //const id = this.getDashIdAgency(passengerName);
     const newBookingData = {
-      id,
       tripId,
       passengerName,
       date,

@@ -8,29 +8,29 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-new-agency',
   templateUrl: './new-agency.page.html',
-  styleUrls: ['./new-agency.page.css']
+  styleUrls: ['./new-agency.page.css'],
 })
 export class NewAgencyPage implements OnInit {
-
   public ranges: IdName[];
   public statuses: string[];
 
-  constructor(idNameApi: IdNameApi, private agenciesApi: AgenciesApi,
-            private router: Router) {
+  constructor(
+    idNameApi: IdNameApi,
+    private agenciesApi: AgenciesApi,
+    private router: Router
+  ) {
     this.ranges = idNameApi.getRanges();
     this.statuses = idNameApi.getStatuses();
-   }
-
-  ngOnInit(): void {
   }
 
-  onSave(newAgencyData: Agency){
-    this.agenciesApi.post(newAgencyData).subscribe( (resp) => {
-      if(resp.ok !== false){
+  ngOnInit(): void {}
+
+  onSave(newAgencyData: Agency) {
+    newAgencyData.status = '';
+    this.agenciesApi.post(newAgencyData).subscribe((resp) => {
+      if (resp.ok !== false) {
         this.router.navigate(['/agencies']);
       }
     });
-
   }
-
 }

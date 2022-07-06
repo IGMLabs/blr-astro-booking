@@ -26,6 +26,7 @@ export class NewBookingPage implements OnInit {
 
   onSave(newBookingData: Booking) {
     newBookingData.client = newBookingData.passengerName;
+    newBookingData.passengers = 0;
     this.bookingApi.post(newBookingData).subscribe(() => {
       this.router.navigate(['/bookings']);
     });

@@ -9,22 +9,25 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-new-trip',
   templateUrl: './new-trip.page.html',
-  styleUrls: ['./new-trip.page.css']
+  styleUrls: ['./new-trip.page.css'],
 })
 export class NewTripPage implements OnInit {
-
   public agencies$!: Observable<Agency[]>;
   public statuses: string[];
 
-  constructor(idNameApi: IdNameApi, private tripsApi: TripsApi, agenciesApi: AgenciesApi) {
+  constructor(
+    idNameApi: IdNameApi,
+    private tripsApi: TripsApi,
+    agenciesApi: AgenciesApi
+  ) {
     this.agencies$ = agenciesApi.getAll$();
     this.statuses = idNameApi.getStatuses();
-   }
-
-  ngOnInit(): void {
   }
 
-  onSave(newTripData: Trips){
+  ngOnInit(): void {}
+
+  onSave(newTripData: Trips) {
+    newTripData.price = 10000000;
     this.tripsApi.post(newTripData).subscribe();
   }
 }
